@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'data/app_state.dart';
 import 'presentation/auth/login_screen.dart';
 import 'presentation/auth/register_screen.dart';
 import 'presentation/home/home_screen.dart';
@@ -12,67 +13,66 @@ import 'presentation/order/order_tracking_screen.dart';
 import 'presentation/reservation/reservation_screen.dart';
 
 class AppRouter {
-  static final GoRouter router = GoRouter(
-    initialLocation: '/login',
-    routes: [
-      // Auth Routes
-      GoRoute(
-        path: '/login',
-        builder: (context, state) => const LoginScreen(),
-      ),
-      GoRoute(
-        path: '/register',
-        builder: (context, state) => const RegisterScreen(),
-      ),
+  static GoRouter createRouter(AppState appState) {
+    return GoRouter(
+      initialLocation: '/login',
+      routes: [
+        GoRoute(
+          path: '/login',
+          builder: (context, state) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: '/register',
+          builder: (context, state) => const RegisterScreen(),
+        ),
 
-      // Main App Shell (Bottom Nav)
-      ShellRoute(
-        builder: (context, state, child) {
-          return MainScaffold(child: child);
-        },
-        routes: [
-          GoRoute(
-            path: '/',
-            builder: (context, state) => const HomeScreen(),
-          ),
-          GoRoute(
-            path: '/menu',
-            builder: (context, state) => const MenuScreen(),
-          ),
-          GoRoute(
-            path: '/cart',
-            builder: (context, state) => const CartScreen(),
-          ),
-          GoRoute(
-            path: '/profile',
-            builder: (context, state) => const ProfileScreen(),
-          ),
-        ],
-      ),
+        ShellRoute(
+          builder: (context, state, child) {
+            return MainScaffold(child: child);
+          },
+          routes: [
+            GoRoute(
+              path: '/',
+              builder: (context, state) => const HomeScreen(),
+            ),
+            GoRoute(
+              path: '/menu',
+              builder: (context, state) => const MenuScreen(),
+            ),
+            GoRoute(
+              path: '/cart',
+              builder: (context, state) => const CartScreen(),
+            ),
+            GoRoute(
+              path: '/profile',
+              builder: (context, state) => const ProfileScreen(),
+            ),
+          ],
+        ),
 
-      // Stack Routes
-      GoRoute(
-        path: '/food/:id',
-        builder: (context, state) {
-          final id = state.pathParameters['id']!;
-          return FoodDetailsScreen(foodId: id);
-        },
-      ),
-      GoRoute(
-        path: '/checkout',
-        builder: (context, state) => const CheckoutScreen(),
-      ),
-      GoRoute(
-        path: '/tracking/:id',
-        builder: (context, state) {
-          final id = state.pathParameters['id']!;
-          return OrderTrackingScreen(orderId: id);
-        },
-      ),
-      GoRoute(
-        path: '/reservation',
-        builder: (context, state) => const ReservationScreen(),
-      ),
-    ],
-  );
+        GoRoute(
+          path: '/food/:id',
+          builder: (context, state) {
+            final id = state.pathParameters['id']!;
+            return FoodDetailsScreen(foodId: id);
+          },
+        ),
+        GoRoute(
+          path: '/checkout',
+          builder: (context, state) => const CheckoutScreen(),
+        ),
+        GoRoute(
+          path: '/tracking/:id',
+          builder: (context, state) {
+            final id = state.pathParameters['id']!;
+            return OrderTrackingScreen(orderId: id);
+          },
+        ),
+        GoRoute(
+          path: '/reservation',
+          builder: (context, state) => const ReservationScreen(),
+        ),
+      ],
+    );
+  }
 }

@@ -35,24 +35,20 @@ class FoodCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
             Stack(
               children: [
-                Hero(
-                  tag: 'food_image_${food.id}',
-                  child: CachedNetworkImage(
-                    imageUrl: food.imageUrl,
-                    height: isHorizontal ? 120 : 160,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(child: Icon(Icons.restaurant, color: Colors.grey)),
-                    ),
-                    errorWidget: (context, url, error) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(child: Icon(Icons.broken_image, color: Colors.grey)),
-                    ),
+                CachedNetworkImage(
+                  imageUrl: food.imageUrl,
+                  height: isHorizontal ? 120 : 160,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                    color: Colors.grey[200],
+                    child: const Center(child: Icon(Icons.restaurant, color: Colors.grey)),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    color: Colors.grey[200],
+                    child: const Center(child: Icon(Icons.broken_image, color: Colors.grey)),
                   ),
                 ),
                 if (food.dietaryTags.isNotEmpty)
@@ -85,7 +81,6 @@ class FoodCard extends StatelessWidget {
                 ),
               ],
             ),
-            // Details
             Padding(
               padding: const EdgeInsets.all(12),
               child: Column(

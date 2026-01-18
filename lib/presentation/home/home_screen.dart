@@ -14,14 +14,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<AppState>().fetchFoods();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
     final featured = appState.foods.where((f) => f.isPopular).toList();
@@ -76,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           
-          // Banners
           SliverToBoxAdapter(
             child: SizedBox(
               height: 160,
@@ -93,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
-          // Categories
           SliverToBoxAdapter(
             child: SizedBox(
               height: 40,
@@ -118,7 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
-          // Featured
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverToBoxAdapter(
@@ -134,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 230, // Card height
+              height: 230,
               child: appState.isLoadingFoods
                   ? const Center(child: CircularProgressIndicator())
                   : ListView.separated(
@@ -151,7 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
-          // All Items Grid
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverToBoxAdapter(
@@ -179,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
           ),
           
-          const SliverToBoxAdapter(child: SizedBox(height: 80)), // Bottom padding
+          const SliverToBoxAdapter(child: SizedBox(height: 80)),
         ],
       ),
     );

@@ -31,7 +31,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
             ),
             const SizedBox(height: 32),
 
-            // Date
             Text('Date', style: context.textStyles.titleMedium?.bold),
             const SizedBox(height: 8),
             InkWell(
@@ -65,7 +64,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
             const SizedBox(height: 24),
 
-            // Time
             Text('Time', style: context.textStyles.titleMedium?.bold),
             const SizedBox(height: 8),
             InkWell(
@@ -97,7 +95,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
             const SizedBox(height: 24),
 
-            // Guests
+
             Text('Number of Guests', style: context.textStyles.titleMedium?.bold),
             const SizedBox(height: 8),
             Row(

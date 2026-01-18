@@ -52,30 +52,25 @@ extension TextStyleExtensions on TextStyle {
 }
 
 class AppColors {
-  // Primary - Warm Orange/Red (Spices, Curry)
-  static const primary = Color(0xFFFF5722); // Deep Orange
+  static const primary = Color(0xFFFF5722);
   static const onPrimary = Color(0xFFFFFFFF);
   static const primaryContainer = Color(0xFFFFCCBC);
   static const onPrimaryContainer = Color(0xFF3E1000);
 
-  // Secondary - Fresh Green (Vegetables, Nature)
   static const secondary = Color(0xFF4CAF50);
   static const onSecondary = Color(0xFFFFFFFF);
   static const secondaryContainer = Color(0xFFC8E6C9);
   static const onSecondaryContainer = Color(0xFF002200);
 
-  // Tertiary - Golden/Yellow (Turmeric, Fried food)
   static const tertiary = Color(0xFFFFC107);
   static const onTertiary = Color(0xFF000000);
 
-  // Neutral / Background
-  static const background = Color(0xFFFFFBF7); // Warm Creamy White
+  static const background = Color(0xFFFFFBF7);
   static const surface = Color(0xFFFFFFFF);
-  static const onSurface = Color(0xFF2D2520); // Dark Brown-Gray
+  static const onSurface = Color(0xFF2D2520);
   static const outline = Color(0xFFD7CCC8);
   static const shadow = Color(0xFF2D2520);
 
-  // Error
   static const error = Color(0xFFBA1A1A);
   static const onError = Color(0xFFFFFFFF);
 }
@@ -89,7 +84,7 @@ class DarkAppColors {
   static const secondary = Color(0xFF81C784);
   static const onSecondary = Color(0xFF003305);
 
-  static const background = Color(0xFF1A1614); // Dark Warm Gray
+  static const background = Color(0xFF1A1614);
   static const surface = Color(0xFF25201D);
   static const onSurface = Color(0xFFEDE0DB);
   static const outline = Color(0xFFA18C83);

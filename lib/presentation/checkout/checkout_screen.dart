@@ -21,7 +21,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   void initState() {
     super.initState();
-    // Default to first address
     final user = context.read<AppState>().currentUser;
     if (user != null && user.savedAddresses.isNotEmpty) {
       _selectedAddress = user.savedAddresses.first;
@@ -38,9 +37,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     setState(() => _isPlacingOrder = true);
     try {
-      final order = await context.read<AppState>().placeOrder(_selectedAddress!.fullAddress);
-      if (mounted) {
-        context.go('/tracking/${order.id}');
+      final success = await context.read<AppState>().placeOrder(
+        deliveryAddress: {
+          'street': _selectedAddress!.fullAddress,
+          'city': 'Colombo',
+          'postalCode': '00100',
+        },
+        paymentMethod: _selectedPaymentMethod.toLowerCase(),
+      );
+      if (mounted && success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Order placed successfully!')),
+        );
+        Future.delayed(const Duration(seconds: 1), () {
+          if (mounted) context.go('/');
+        });
       }
     } catch (e) {
       if (mounted) {
@@ -65,7 +76,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Delivery Address
             Text('Delivery Address', style: context.textStyles.titleMedium?.bold),
             const SizedBox(height: 12),
             if (user != null)
@@ -82,7 +92,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
             const SizedBox(height: 32),
 
-            // Payment Method
             Text('Payment Method', style: context.textStyles.titleMedium?.bold),
             const SizedBox(height: 12),
             _buildPaymentMethodTile('Stripe', FontAwesomeIcons.ccStripe),
@@ -92,7 +101,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
             const SizedBox(height: 32),
 
-            // Summary
             Text('Order Summary', style: context.textStyles.titleMedium?.bold),
             const SizedBox(height: 12),
             Container(

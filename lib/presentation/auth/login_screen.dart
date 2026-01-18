@@ -16,22 +16,40 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController(text: 'password');
   bool _isLoading = false;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (context.read<AppState>().isAuthenticated) {
+        context.go('/');
+      }
+    });
+  }
+
   Future<void> _handleLogin() async {
     setState(() => _isLoading = true);
     try {
-      await context.read<AppState>().login(
+      final success = await context.read<AppState>().login(
         _emailController.text,
         _passwordController.text,
       );
-      if (mounted) context.go('/');
-    } catch (e) {
-      if (mounted) {
+      
+      if (!mounted) return;
+      
+      if (success) {
+        context.go('/');
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login failed: $e')),
+          const SnackBar(content: Text('Invalid email or password')),
         );
+        setState(() => _isLoading = false);
       }
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+      setState(() => _isLoading = false);
     }
   }
 

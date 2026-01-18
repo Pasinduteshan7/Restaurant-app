@@ -135,7 +135,6 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           
-          // Checkout Section
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
@@ -153,7 +152,6 @@ class CartScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Promo Code
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     decoration: BoxDecoration(
@@ -184,7 +182,6 @@ class CartScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   
-                  // Totals
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -216,7 +213,6 @@ class CartScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   
-                  // Checkout Button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(

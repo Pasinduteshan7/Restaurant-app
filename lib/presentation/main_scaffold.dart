@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../data/app_state.dart';
-import '../theme.dart';
 
 class MainScaffold extends StatefulWidget {
   final Widget child;
@@ -19,7 +18,7 @@ class _MainScaffoldState extends State<MainScaffold> {
     if (location.startsWith('/menu')) return 1;
     if (location.startsWith('/cart')) return 2;
     if (location.startsWith('/profile')) return 3;
-    return 0; // Home
+    return 0;
   }
 
   void _onItemTapped(int index) {

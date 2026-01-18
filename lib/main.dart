@@ -17,13 +17,17 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
       ],
-      child: MaterialApp.router(
-        title: 'CurryFlow',
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.light,
-        routerConfig: AppRouter.router,
-        debugShowCheckedModeBanner: false,
+      child: Consumer<AppState>(
+        builder: (context, appState, _) {
+          return MaterialApp.router(
+            title: 'CurryFlow',
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: ThemeMode.light,
+            routerConfig: AppRouter.createRouter(appState),
+            debugShowCheckedModeBanner: false,
+          );
+        },
       ),
     );
   }

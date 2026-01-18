@@ -21,7 +21,6 @@ class _MenuScreenState extends State<MenuScreen> {
     final appState = context.watch<AppState>();
     final categories = ['All', 'Rice & Curry', 'Kottu', 'Hoppers', 'Short Eats', 'Seafood', 'Rice Specialties'];
 
-    // Filter logic
     final filteredFoods = appState.foods.where((food) {
       final matchesCategory = _selectedCategory == 'All' || food.category == _selectedCategory;
       final matchesSearch = food.name.toLowerCase().contains(_searchQuery.toLowerCase());
@@ -34,7 +33,6 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
       body: Column(
         children: [
-          // Search
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
@@ -46,7 +44,6 @@ class _MenuScreenState extends State<MenuScreen> {
               ),
             ),
           ),
-          // Categories
           SizedBox(
             height: 40,
             child: ListView.separated(
@@ -72,7 +69,6 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          // Grid
           Expanded(
             child: filteredFoods.isEmpty
                 ? Center(child: Text('No items found', style: context.textStyles.titleMedium))

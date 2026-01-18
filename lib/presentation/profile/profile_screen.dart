@@ -31,7 +31,6 @@ class ProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Profile Header
             Center(
               child: Column(
                 children: [
@@ -52,7 +51,6 @@ class ProfileScreen extends StatelessWidget {
             
             const SizedBox(height: 32),
 
-            // Actions
             ListTile(
               leading: const Icon(Icons.table_restaurant, color: AppColors.primary),
               title: const Text('Book a Table'),

@@ -1,19 +1,15 @@
 import 'models.dart';
 
-/// Simulates a backend service with mock data
 class MockApiService {
-  // Simulate network delay
   Future<void> _delay([int milliseconds = 800]) async {
     await Future.delayed(Duration(milliseconds: milliseconds));
   }
 
-  // --- Auth ---
   Future<User> login(String email, String password) async {
     await _delay();
     if (email == 'user@example.com' && password == 'password') {
       return _mockUser;
     }
-    // For demo purposes, allow any login
     return _mockUser;
   }
 
@@ -27,7 +23,6 @@ class MockApiService {
     );
   }
 
-  // --- Food ---
   Future<List<FoodItem>> getFoodItems() async {
     await _delay(500);
     return _allFoods;
@@ -43,14 +38,13 @@ class MockApiService {
     return _allFoods.where((f) => f.category == category).toList();
   }
 
-  // --- Orders ---
   Future<Order> placeOrder(List<CartItem> items, double total, String address) async {
     await _delay(1500);
     return Order(
       id: 'ORD-${DateTime.now().millisecondsSinceEpoch.toString().substring(5)}',
       userId: _mockUser.id,
       items: items,
-      subtotal: total - 5.0, // assumption
+      subtotal: total - 5.0,
       deliveryFee: 5.0,
       totalAmount: total,
       status: 'Pending',
@@ -64,8 +58,6 @@ class MockApiService {
     return _mockOrders;
   }
 
-  // --- Mock Data ---
-
   static final User _mockUser = User(
     id: 'user_123',
     name: 'Kasun Perera',
@@ -78,7 +70,6 @@ class MockApiService {
   );
 
   static final List<FoodItem> _allFoods = [
-    // Rice & Curry
     FoodItem(
       id: 'rc1',
       name: 'Chicken Rice & Curry',
@@ -100,8 +91,6 @@ class MockApiService {
       dietaryTags: ['Spicy', 'Pescatarian'],
       isPopular: true,
     ),
-    
-    // Kottu
     FoodItem(
       id: 'k1',
       name: 'Chicken Kottu Roti',
@@ -131,8 +120,6 @@ class MockApiService {
       category: 'Kottu',
       dietaryTags: ['Vegan', 'Spicy'],
     ),
-
-    // Hoppers
     FoodItem(
       id: 'h1',
       name: 'String Hoppers Set',
@@ -152,8 +139,6 @@ class MockApiService {
       category: 'Hoppers',
       dietaryTags: ['Vegetarian'],
     ),
-
-    // Short Eats
     FoodItem(
       id: 's1',
       name: 'Fish Rolls (3pcs)',
@@ -181,8 +166,6 @@ class MockApiService {
       category: 'Short Eats',
       dietaryTags: ['Spicy'],
     ),
-
-    // Seafood
     FoodItem(
       id: 'sf1',
       name: 'Devilled Prawns',
@@ -203,8 +186,6 @@ class MockApiService {
       dietaryTags: ['Spicy'],
       isPopular: true,
     ),
-
-    // Rice Specialties
     FoodItem(
       id: 'rs1',
       name: 'Vegetable Fried Rice',

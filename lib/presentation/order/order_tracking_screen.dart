@@ -18,7 +18,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   @override
   void initState() {
     super.initState();
-    // Simulate progress updates
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) setState(() => _currentStep = 2);
     });
@@ -39,7 +38,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
       ),
       body: Column(
         children: [
-          // Map Placeholder
           Expanded(
             flex: 2,
             child: Container(
@@ -48,7 +46,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  // Fake map pattern
                   Opacity(
                     opacity: 0.1,
                     child: GridView.builder(
@@ -62,7 +59,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   ),
                   const Center(child: Text("Google Maps Placeholder", style: TextStyle(color: Colors.grey))),
                   
-                  // Delivery guy icon animation
                   if (_currentStep >= 2)
                     Positioned(
                       bottom: 50,
@@ -76,7 +72,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             ),
           ),
 
-          // Status Sheet
           Expanded(
             flex: 3,
             child: Container(
@@ -101,7 +96,6 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   Text('25 - 30 Minutes', style: context.textStyles.headlineSmall?.bold),
                   const SizedBox(height: 24),
                   
-                  // Steps
                   _buildStep(1, 'Order Placed', 'We have received your order', Icons.receipt_long),
                   _buildLine(1),
                   _buildStep(2, 'Preparing', 'Kitchen is preparing your food', Icons.soup_kitchen),

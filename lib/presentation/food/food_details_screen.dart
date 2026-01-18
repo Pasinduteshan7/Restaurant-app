@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../../data/app_state.dart';
 import '../../data/models.dart';
 import '../../theme.dart';
@@ -27,7 +26,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
     
-    // Find food item
     FoodItem? food;
     try {
       food = appState.foods.firstWhere((f) => f.id == widget.foodId);
@@ -41,7 +39,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // App Bar Image
           SliverAppBar(
             expandedHeight: 300,
             pinned: true,
@@ -68,17 +65,13 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
-              background: Hero(
-                tag: 'food_image_${food.id}',
-                child: CachedNetworkImage(
-                  imageUrl: food.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+              background: CachedNetworkImage(
+                imageUrl: food.imageUrl,
+                fit: BoxFit.cover,
               ),
             ),
           ),
 
-          // Content
           SliverToBoxAdapter(
             child: Container(
               decoration: BoxDecoration(
@@ -90,7 +83,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title & Price
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -108,7 +100,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   ),
                   const SizedBox(height: 8),
                   
-                  // Rating & Time
                   Row(
                     children: [
                       const Icon(Icons.star, color: Colors.amber, size: 20),
@@ -127,7 +118,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   
                   const SizedBox(height: 24),
                   
-                  // Description
                   Text('Description', style: context.textStyles.titleLarge?.bold),
                   const SizedBox(height: 8),
                   Text(
@@ -137,7 +127,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   
                   const SizedBox(height: 24),
                   
-                  // Ingredients
                   if (food.ingredients.isNotEmpty) ...[
                     Text('Ingredients', style: context.textStyles.titleLarge?.bold),
                     const SizedBox(height: 8),
@@ -154,7 +143,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                     const SizedBox(height: 24),
                   ],
 
-                  // Spice Level Customization
                   Text('Spice Level', style: context.textStyles.titleLarge?.bold),
                   const SizedBox(height: 12),
                   SizedBox(
@@ -180,7 +168,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 100), // Spacing for bottom button
+                  const SizedBox(height: 100),
                 ],
               ),
             ),
@@ -202,7 +190,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
         child: SafeArea(
           child: Row(
             children: [
-              // Quantity
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[100],
@@ -226,7 +213,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                 ),
               ),
               const SizedBox(width: 16),
-              // Add to Cart
               Expanded(
                 child: ElevatedButton(
                   onPressed: _isAdding ? null : () {
@@ -235,7 +221,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                     context.read<AppState>().addToCart(
                       food!,
                       quantity: _quantity,
-                      options: [_selectedSpiceLevel],
                     );
 
                     Future.delayed(const Duration(milliseconds: 500), () {
